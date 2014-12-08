@@ -230,7 +230,7 @@ void batteryLCD(){//displaysbatterylevels on LCD
 			}
 			break;
 		case false:
-			ExpanderBatteryLevel = SensorValue[ExpanderBattery] / 7;
+			ExpanderBatteryLevel = (SensorValue[ExpanderBattery] / 45.6) * 100;
 			clearLCDLine(0);
 			displayLCDString(0, 0, "Secondary: ");
 			if (ExpanderBatteryLevel < 550){
@@ -269,7 +269,6 @@ void calJoy(int wait = 0){//recalibrates joystick by saving values while joystic
 	clearLCDLine(1);
 }//Function-variable creation end
 void pre_auton(){//Pre-Autonomous block begin
-	//calJoy();
 	clear();
 	while (bIfiRobotDisabled){//outputs true when robot is disabled, ends subroutine when autonomous starts
 		displayLCDString(1, 0, "<<");
@@ -654,9 +653,6 @@ task usercontrol(){//Usercontrol block begin
 		if (vexRT[Btn8D]==1||nLCDButtons==2){
 			halt(2);
 		}
-		/*else if (nLCDButtons==2){
-		halt(2);
-		}*/
 		else if (vexRT[Btn5U] == 1){
 			left(127);
 		}
@@ -667,16 +663,16 @@ task usercontrol(){//Usercontrol block begin
 			halt();
 			calJoy();
 		}
-		/*else if (vexRT[Btn8U] == 1){
-		if (batteryLCDBool == true){
-		batteryLCDBool = false;
-		wait1Msec(500);
+		else if (vexRT[Btn8U] == 1){
+			if (batteryLCDBool == true){
+				batteryLCDBool = false;
+				wait1Msec(500);
+			}
+			else if (batteryLCDBool == false){
+				batteryLCDBool = true;
+				wait1Msec(500);
+			}
 		}
-		else if (batteryLCDBool == false){
-		batteryLCDBool = true;
-		wait1Msec(500);
-		}
-		}*/
 		else if (vexRT[Btn6D] == 1){
 			if (-vexRT[AccelX]*2 > 127){
 				gX = 127;
@@ -757,4 +753,3 @@ task usercontrol(){//Usercontrol block begin
 	}
 }
 //usercontrol block end
-//rubber band number: 14 per side
