@@ -52,6 +52,7 @@ void halt(int set = 0){//stops all movement
 		motor[armMotorL2] = 0;
 		motor[armMotorR1] = 0;
 		motor[armMotorR2] = 0;
+		motor[rollerMotor] = 0;
 	}
 }
 void forward(int cm, int speed = 63){//forward for designated distance
@@ -406,178 +407,179 @@ void pre_auton(){//Pre-Autonomous block begin
 }//Pre-autonomous block end
 task autonomous(){//Autonomous block begin
 	clearLCDLine(1);
+	bLCDBacklight = true;
 	switch(auton){
 	case 1://red autoloader
 		clearLCDLine(1);
 		left(75,10350);   //strafe left
-		halt();
+		halt(2);
 		backward(600,100);
-		halt();
+		halt(2);
 		closeClaw(400,75);
 		raiseArm(300,75);
-		halt();
+		halt(2);
 		motor[clawMotor] = 0; //release cube
 		wait1Msec(500);
-		halt();
+		halt(2);
 		forward(1000,100);
 		wait1Msec(200);
 		backward(2000,100);
-		halt();
+		halt(2);
 		wait1Msec(300);
 		turnRightPlace(5300,100);   //line up for section
-		halt();
+		halt(2);
 		wait1Msec(200);
 		raiseArm(200);
-		halt();
+		halt(2);
 		forward(3200);
-		halt();
+		halt(2);
 		openClaw(900,75);
 		openClaw(0,20);
 		forward(4200,100);
-		halt();
+		halt(2);
 		closeClaw(200);   //grab skyrise section
 		wait1Msec(200);
 		backwardTime(0,75);
 		raiseArm(200,75);
-		halt();
+		halt(2);
 		wait1Msec(200);
 		raiseArm(500,75);
-		halt();
+		halt(2);
 		wait1Msec(200);
 		backward(1000,100);
-		halt();
+		halt(2);
 		wait1Msec(200);
 		backward(3000,100);
-		halt();
+		halt(2);
 		wait1Msec(100);
 		turnLeftPlace(14000,50); //line up to base
-		halt();
+		halt(2);
 		wait1Msec(300);
 		lowerArm(250,25);
-		halt();
+		halt(2);
 		wait1Msec(300);
 		forward(1700,50);
-		halt();
+		halt(2);
 		lowerArm(100);
-		halt();
+		halt(2);
 		wait1Msec(500);
 		openClaw(500);  //drop section
-		halt();
+		halt(2);
 		wait1Msec(500);
 		backward(500,75);
-		halt();
+		halt(2);
 		break;
 	case 2://red posts
 		clearLCDLine(1);
 		raiseArm(500,100);
 		backward(16000,100);
-		halt();
+		halt(2);
 		wait1Msec(500);
 		turnLeftPlace(6500,75);
-		halt();
+		halt(2);
 		wait1Msec(1000);
 		lowerArm(1500,75);
-		halt();
+		halt(2);
 		break;
 	case 3://blue autoloader
 		clearLCDLine(1);
 		clear();
 		raiseArm(2000,100);
-		halt();
+		halt(2);
 		lowerArm(1100,100);
-		halt();
+		halt(2);
 		wait1Msec(1000);
 		right(75,15350);   //strafe right
 		wait1Msec(450);
-		halt();
+		halt(2);
 		backward(500,100);
-		halt();
+		halt(2);
 		lowerArm(700);//release cube
-		halt();
+		halt(2);
 		lowerIntake(1100);
-		halt();
+		halt(2);
 		wait1Msec(500);
-		halt();
+		halt(2);
 		backward(2500,100);
-		halt();
+		halt(2);
 		lowerArm(400,100);
-		halt();
+		halt(2);
 		wait1Msec(300);
 		right(100,12000);
-		halt();
+		halt(2);
 		turnLeftPlace(13000,100);   //line up for section
-		halt();
+		halt(2);
 		wait1Msec(200);
 		forward(11700);
-		halt();
+		halt(2);
 		lowerIntake(1300);
-		halt();
+		halt(2);
 		right(100,4300);
-		halt();
+		halt(2);
 		lowerArm(150,100);
-		halt();
+		halt(2);
 		openClaw(900,75);
 		openClaw(0,20);
 		forward(7800,100); //drive to section
-		halt();
+		halt(2);
 		raiseArm(75);
-		halt();
+		halt(2);
 		closeClaw(200);   //grab skyrise section
 		wait1Msec(200);
 		raiseArm(0,100);
 		backward(700,100);
-		halt();
+		halt(2);
 		backward(8300,100);
-		halt();
+		halt(2);
 		raiseArm(300,100);
-		halt();
+		halt(2);
 		wait1Msec(200);
 		turnRightPlace(16500,50); //line up to base
-		halt();
+		halt(2);
 		wait1Msec(300);
 		backward(1000,100);
-		halt();
+		halt(2);
 		lowerArm(300,100);
-		halt();
+		halt(2);
 		lowerArm(550,25);
-		halt();
+		halt(2);
 		wait1Msec(300);
 		backward(1700,50);
-		halt();
+		halt(2);
 		lowerArm(100);
-		halt();
+		halt(2);
 		backward(100,50);
-		halt();
+		halt(2);
 		forward(300,50);
-		halt();
+		halt(2);
 		lowerArm(150,75);
-		halt();
+		halt(2);
 		forward(600,65);
-		halt();
+		halt(2);
 		wait1Msec(500);
 		openClaw(1000);  //drop section
-		halt();
+		halt(2);
 		wait1Msec(500);
 		backward(500,75);
-		halt();
+		halt(2);
 		break;
 	case 4://blue posts
 		clearLCDLine(1);
 		raiseArm(500,100);
 		backward(16000,100);
-		halt();
+		halt(2);
 		wait1Msec(500);
 		turnRightPlace(6500,75);
-		halt();
+		halt(2);
 		wait1Msec(1000);
 		lowerArm(1500,75);
-		halt();
+		halt(2);
 		turnRightPlace(2000,100);
-		halt();
+		halt(2);
 		backward(15000,100);
-		halt();
+		halt(2);
 		turnRightPlace(30000,100);
-		halt();
+		halt(2);
 		break;
 	case 5://programming skills
 		clearLCDLine(1);
@@ -585,11 +587,11 @@ task autonomous(){//Autonomous block begin
 		break;
 	case 6://worst-case scenario
 		backward(4000,127);
-		halt();
+		halt(2);
 		forward(2000,127);
-		halt();
+		halt(2);
 		backward(4000,127);
-		halt();
+		halt(2);
 		break;
 	case 7:
 		clear();
