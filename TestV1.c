@@ -586,8 +586,7 @@ task autonomous(){//Autonomous block begin
 		backward(4000,127);
 		halt();
 		break;
-	case 7://test for errors program
-		//string leftEncoder, rightEncoder;
+	case 7:
 		clear();
 		bLCDBacklight = true;
 		motor[leftMotorF] = 75;

@@ -208,6 +208,14 @@ void closeClaw(int time,int speed = 63){//closes claw
 	motor[clawMotor] = -speed;
 	wait1Msec(time);
 }
+void raiseIntake(int time){
+	motor[rollerMotor] = 127;
+	wait1Msec(time);
+}
+void lowerIntake(int time){
+	motor[rollerMotor] = 127;
+	wait1Msec(time);
+}
 void batteryLCD(){//displaysbatterylevels on LCD
 	if (time1[T1]%100 == 0)
 	{
@@ -279,7 +287,7 @@ void pre_auton(){//Pre-Autonomous block begin
 			if (nLCDButtons == 1){
 				while (nLCDButtons == 1){
 				}
-				auton = 6;
+				auton = 7;
 			}
 			else{
 			}
@@ -371,6 +379,23 @@ void pre_auton(){//Pre-Autonomous block begin
 			if (nLCDButtons == 4){
 				while (nLCDButtons == 4){
 				}
+				auton = 7;
+			}
+			else{
+			}
+			break;
+		case 7://testing
+			displayLCDCenteredString(0, "Testing");
+			if (nLCDButtons == 1){
+				while (nLCDButtons == 1){
+				}
+				auton = 6;
+			}
+			else{
+			}
+			if (nLCDButtons == 4){
+				while (nLCDButtons == 4){
+				}
 				auton = 1;
 			}
 			else{
@@ -444,85 +469,93 @@ task autonomous(){//Autonomous block begin
 		break;
 	case 2://red posts
 		clearLCDLine(1);
-		raiseArm(1000,50);
-		//		forward(2000,50);
-		//	halt();
 		raiseArm(500,100);
+		backward(16000,100);
 		halt();
 		wait1Msec(500);
-		backward(5000,100);
-		halt();
-		raiseArm(300);
-		halt();
-		wait1Msec(500);
-		turnLeftPlace(6000,75);
-		halt();
-		wait1Msec(500);
-		raiseArm(500);
-		halt();
-		backward(2700,75);
+		turnLeftPlace(6500,75);
 		halt();
 		wait1Msec(1000);
-		lowerArm(1000,100);
-		halt();
-		backward(500,100);
+		lowerArm(1500,75);
 		halt();
 		break;
 	case 3://blue autoloader
 		clearLCDLine(1);
-		right(75,10350);   //strafe right
+		clear();
+		raiseArm(2000,100);
 		halt();
-		backward(700,100);
+		lowerArm(1100,100);
 		halt();
-		closeClaw(400,75);
-		raiseArm(100,75);
+		wait1Msec(1000);
+		right(75,15350);   //strafe right
+		wait1Msec(450);
 		halt();
-		motor[clawMotor] = 0; //release cube
+		backward(500,100);
+		halt();
+		lowerArm(700);//release cube
+		halt();
+		lowerIntake(1100);
+		halt();
 		wait1Msec(500);
 		halt();
-		forward(1000,100);
-		wait1Msec(200);
-		backward(2000,100);
+		backward(2500,100);
+		halt();
+		lowerArm(400,100);
 		halt();
 		wait1Msec(300);
-		turnLeftPlace(7050,100);   //line up for section
+		right(100,12000);
+		halt();
+		turnLeftPlace(13000,100);   //line up for section
 		halt();
 		wait1Msec(200);
-		raiseArm(100);
+		forward(11700);
 		halt();
-		forward(3200);
+		lowerIntake(1300);
+		halt();
+		right(100,4300);
+		halt();
+		lowerArm(150,100);
 		halt();
 		openClaw(900,75);
 		openClaw(0,20);
-		forward(4200,100);
+		forward(7800,100); //drive to section
+		halt();
+		raiseArm(75);
 		halt();
 		closeClaw(200);   //grab skyrise section
 		wait1Msec(200);
-		backwardTime(0,75);
-		raiseArm(200,75);
+		raiseArm(0,100);
+		backward(700,100);
+		halt();
+		backward(8300,100);
+		halt();
+		raiseArm(300,100);
 		halt();
 		wait1Msec(200);
-		raiseArm(500,75);
+		turnRightPlace(16500,50); //line up to base
 		halt();
-		wait1Msec(200);
+		wait1Msec(300);
 		backward(1000,100);
 		halt();
-		wait1Msec(200);
-		backward(3000,100);
+		lowerArm(300,100);
 		halt();
-		wait1Msec(100);
-		turnRightPlace(13000,50); //line up to base
+		lowerArm(550,25);
 		halt();
 		wait1Msec(300);
-		lowerArm(250,25);
-		halt();
-		wait1Msec(300);
-		forward(1700,50);
+		backward(1700,50);
 		halt();
 		lowerArm(100);
 		halt();
+		backward(100,50);
+		halt();
+		forward(300,50);
+		halt();
+		lowerArm(150,75);
+		halt();
+		forward(600,65);
+		halt();
 		wait1Msec(500);
-		openClaw(500);  //drop section
+		openClaw(1000);  //drop section
 		halt();
 		wait1Msec(500);
 		backward(500,75);
@@ -530,104 +563,25 @@ task autonomous(){//Autonomous block begin
 		break;
 	case 4://blue posts
 		clearLCDLine(1);
-		raiseArm(1000,50);
-		raiseArm(550,100);
+		raiseArm(500,100);
+		backward(16000,100);
 		halt();
 		wait1Msec(500);
-		backward(5000,100);
-		halt();
-		raiseArm(300);
-		halt();
-		turnRightPlace(9200,75);
-		halt();
-		wait1Msec(500);
-		raiseArm(400);
-		halt();
-		backward(2700,75);
+		turnRightPlace(6500,75);
 		halt();
 		wait1Msec(1000);
-		lowerArm(500,100);
+		lowerArm(1500,75);
 		halt();
-		backward(3000,100);
+		turnRightPlace(2000,100);
+		halt();
+		backward(15000,100);
+		halt();
+		turnRightPlace(30000,100);
+		halt();
 		break;
 	case 5://programming skills
 		clearLCDLine(1);
-		/*right(75,10350);   //strafe right
-		halt();
-		backward(600,100);
-		halt();
-		closeClaw(400,75);
-		raiseArm(300,75);
-		halt();
-		motor[clawMotor] = 0; //release cube
-		wait1Msec(500);
-		halt();
-		forward(1000,100);
-		wait1Msec(200);
-		backward(2000,100);
-		halt();
-		wait1Msec(300);
-		turnLeftPlace(7500,100);   //line up for section
-		halt();
-		wait1Msec(200);
-		raiseArm(100);
-		halt();
-		forward(3200);
-		halt();
-		openClaw(900,75);
-		openClaw(0,20);
-		forward(4200,100);
-		halt();
-		closeClaw(200);   //grab skyrise section
-		wait1Msec(200);
-		backwardTime(0,75);
-		raiseArm(200,75);
-		halt();
-		wait1Msec(200);
-		raiseArm(500,75);
-		halt();
-		wait1Msec(200);
-		backward(1000,100);
-		halt();
-		wait1Msec(200);
-		backward(3000,100);
-		halt();
-		wait1Msec(100);
-		turnRightPlace(13000,50); //line up to base
-		halt();
-		wait1Msec(300);
-		lowerArm(250,25);
-		halt();
-		wait1Msec(300);
-		forward(1700,50);
-		halt();
-		lowerArm(100);
-		halt();
-		wait1Msec(500);
-		openClaw(500);  //drop section
-		halt();
-		wait1Msec(500);
-		backward(500,75);
-		halt();
-		lowerArm(500,100);
-		halt();
-		wait1Msec(6000); //reposition */
-		forward(1,127);
-		halt();
-		backward(200,50);
-		halt();
-		forward(5000,127);
-		halt();
-		backward(2000,100);
-		halt();
-		turnLeftPlace(5000,100);
-		halt();
-		forward(2000,127);
-		halt();
-		turnLeftPlace(6000,100);
-		halt();
-		forward(20000,127);
-		halt();
+		forward(50000,100);
 		break;
 	case 6://worst-case scenario
 		backward(4000,127);
@@ -636,6 +590,21 @@ task autonomous(){//Autonomous block begin
 		halt();
 		backward(4000,127);
 		halt();
+		break;
+	case 7:
+		clear();
+		bLCDBacklight = true;
+		motor[leftMotorF] = 75;
+		motor[leftMotorR] = 75;
+		motor[rightMotorF] = 75;
+		motor[rightMotorR] = 75;
+		while(true){
+			displayLCDString(0, 0, "EncoderL: ");
+			displayNextLCDNumber(nMotorEncoder[leftMotorR]);
+			displayLCDString(1, 0, "EncoderR: ");
+			displayNextLCDNumber(nMotorEncoder[rightMotorR]);
+			//displayLCDNumber(1, 3, nMotorEncoder[leftMotorR]);
+		}
 		break;
 	}
 	while(bIfiAutonomousMode){//"catch" program while autonomous mode is active to stop auton code from looping
