@@ -53,7 +53,6 @@ void forward(int cm, int speed = 63){//forward for designated distance
 	motor[armMotorL2] = 0;
 	motor[armMotorR1] = 0;
 	motor[armMotorR2] = 0;
-	halt();
 }
 void backward(int cm, int speed = 63){//see above, but moves backwards
 	clear();
@@ -72,7 +71,7 @@ void backwardTime(int time, int speed){//moves backward for a time, not a distan
 	motor[rightMotorR] = -speed;
 	wait1Msec(time);
 }
-void left(int speed = 63, int cm = 0){//moves left for a designated distance
+void left(int cm, int speed = 63){//moves left for a designated distance
 	clear();
 	if (cm == 0){
 		motor[rightMotorF] = speed;
@@ -88,11 +87,10 @@ void left(int speed = 63, int cm = 0){//moves left for a designated distance
 			motor[leftMotorF] = -speed;
 			motor[leftMotorR] = speed;
 		}
-		halt();
 	}
 	clear();
 }
-void right(int speed = 63, float cm = 0){//see above, but moves right
+void right(float cm, int speed = 63){//see above, but moves right
 	clear();
 	if (cm == 0){
 		motor[rightMotorF] = -speed;
@@ -108,7 +106,6 @@ void right(int speed = 63, float cm = 0){//see above, but moves right
 			motor[leftMotorF] = speed;
 			motor[leftMotorR] = -speed;
 		}
-		halt();
 	}
 	clear();
 }
@@ -125,7 +122,6 @@ void turnLeftPlace(int cm, int speed = 127){//turns left in one place
 	motor[armMotorL2] = 0;
 	motor[armMotorR1] = 0;
 	motor[armMotorR2] = 0;
-	halt();
 }
 void turnLeftPlaceDegrees(int degrees, int speed = 127){//turns left in one place
 	clear();
@@ -140,7 +136,6 @@ void turnLeftPlaceDegrees(int degrees, int speed = 127){//turns left in one plac
 	motor[armMotorL2] = 0;
 	motor[armMotorR1] = 0;
 	motor[armMotorR2] = 0;
-	halt();
 }
 void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while turning
 	clear();
@@ -155,7 +150,6 @@ void turnLeftArc(int cm, int speed = 63){//see above, but moves forward while tu
 	motor[armMotorL2] = 0;
 	motor[armMotorR1] = 0;
 	motor[armMotorR2] = 0;
-	halt();
 }
 void turnRightPlace(int cm, int speed = 63){//turns right in one place
 	clear();
@@ -170,7 +164,6 @@ void turnRightPlace(int cm, int speed = 63){//turns right in one place
 	motor[armMotorL2] = 0;
 	motor[armMotorR1] = 0;
 	motor[armMotorR2] = 0;
-	halt();
 }
 void turnRightPlaceDegrees(int degrees, int speed = 63){//turns right in one place
 	clear();
@@ -185,7 +178,6 @@ void turnRightPlaceDegrees(int degrees, int speed = 63){//turns right in one pla
 	motor[armMotorL2] = 0;
 	motor[armMotorR1] = 0;
 	motor[armMotorR2] = 0;
-	halt();
 }
 void turnRightArc(int cm, int speed = 63){//see above, but movesforward while turning
 	clear();
@@ -200,7 +192,6 @@ void turnRightArc(int cm, int speed = 63){//see above, but movesforward while tu
 	motor[armMotorL2] = 0;
 	motor[armMotorR1] = 0;
 	motor[armMotorR2] = 0;
-	halt();
 }
 void raiseArm(int time, int speed = 63){//raises arm
 	motor[armMotorL1] = -speed;
@@ -615,10 +606,10 @@ task usercontrol(){//Usercontrol block begin
 	while(true){
 		batteryLCD();
 		if(vexRT[Btn5U] == 1){
-			left(127);
-		}
+			left(0,127);
+		
 		else if(vexRT[Btn6U] == 1){
-			right(127);
+			right(0,127);
 		}
 		else if(vexRT[Btn8U] == 1){
 			if(batteryLCDBool == true){
@@ -641,6 +632,11 @@ task usercontrol(){//Usercontrol block begin
 		motor[armMotorR1] = vexRT[Ch2Xmtr2];
 		motor[armMotorR2] = vexRT[Ch2Xmtr2];
 		motor[intakeMotor] = vexRT[Ch3Xmtr2];
+		//void(forward)
+			motor=1
+			
+			motor=1
+			
 		if(vexRT[Btn6UXmtr2] == 1){
 			motor[clawMotor] = 75;
 		}
